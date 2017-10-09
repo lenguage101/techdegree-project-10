@@ -1,0 +1,86 @@
+body {
+	background:#f9f9f9;
+}
+/********
+div.board
+*********/
+.board {
+	width: 95%;
+	margin: 0 auto;
+	overflow: auto;
+}
+/***********************
+Styling the profile card
+************************/
+.card{
+	width: 90%;
+	border: 1.5px solid rgba(0,0,0,.15);
+	border-radius: 5px;
+	margin: 20px auto;
+	overflow: auto:;
+	padding: 20px 0;
+	background: #fff;
+}
+.card:hover{
+	cursor: pointer;
+}
+.profile-pic{
+	width: 100%;
+	text-align: center;
+}
+.picture{
+	border-radius: 50%;
+}
+.profile-info {
+	text-align: center;
+}
+
+@media screen and (min-width: 768px){
+	.card {
+		width: 45%;
+		display: inline-block;
+	}
+	.card:nth-child(odd){
+		float: right;
+	}
+	.card:nth-child(even){
+		float: left;
+	}
+	.profile-pic {
+		width: 50%;
+		display:inline-block;
+	}
+	.profile-info {
+		width: 50%;
+		text-align: left;
+		display: inline-block;
+		float: right;
+	}
+}
+@media screen and (min-width: 1024px){
+	.card {
+		width: 30%;
+		margin-right: 4%;
+	}	
+	.card:nth-child(odd),
+	.card:nth-child(even){
+		float: none;
+	}
+	.card:nth-child(3n+1){
+		margin-right: 0;
+	}
+	.profile-pic {
+		width: 30%;
+	}
+	.picture {
+		width: 85%;
+	}	
+	.profile-info {
+		width: 67%;
+	}
+}
+@media screen and (min-width: 1700px){
+	.profile-info{
+		width: 70%;
+	}
+}
