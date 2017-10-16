@@ -1,5 +1,6 @@
 body {
 	background:#f9f9f9;
+	font-family: 'Lato';
 }
 /********
 div.board
@@ -33,6 +34,12 @@ Styling the profile card
 }
 .profile-info {
 	text-align: center;
+}
+.name, .city {
+	text-transform: capitalize;
+}
+.name {
+	font-weight: 700;
 }
 
 @media screen and (min-width: 768px){

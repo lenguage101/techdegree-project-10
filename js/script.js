@@ -1,16 +1,13 @@
 $(document).ready(function(){
-	lightbox.option({
-		'alwaysShowNavOnTouchDevices' : true,
-		'fadeDuration' : 500
-	})
 	for(let i = 0; i < 12; i++){		
 		//Creating the HTML elements
 		let $card = $('div.card')[i];
+		let $anchor = document.createElement('a');
+		$anchor.className = "modal";
 		let $profilePic = document.createElement('div'); 
 		$profilePic.className="profile-pic";
 		let $picture = document.createElement('img');
 		$picture.className = "picture";
-		let $pictureLink = document.createElement('a');
 		let $profileInfo = document.createElement('div');
 		$profileInfo.className = "profile-info";
 		let $name = document.createElement('p');
@@ -26,10 +23,10 @@ $(document).ready(function(){
 		let $birthday = document.createElement('p');
 		$birthday.className = "birthday";
 		//Appending the elements to the divs
-		$card.appendChild($profileInfo);
-		$card.insertBefore($profilePic, $profileInfo);
+		$card.appendChild($anchor);
+		$anchor.appendChild($profileInfo);
+		$anchor.insertBefore($profilePic, $profileInfo);
 		$profilePic.appendChild($picture);
-		$picture.appendChild($pictureLink);
 		$profileInfo.appendChild($birthday);
 		$profileInfo.insertBefore($street, $birthday);
 		$profileInfo.insertBefore($phone, $street);
@@ -42,7 +39,7 @@ $(document).ready(function(){
 			dataType: 'json',
 			success: function(data) {
 				$picture.src = data.results[0].picture.large;
-				$pictureLink.href = data.results[0].picture.large;
+				$anchor.href = data.results[0].picture.large;
 				$name.innerHTML = data.results[0].name.first + " " + data.results[0].name.last;
 				$email.innerHTML = data.results[0].email;
 				$city.innerHTML = data.results[0].location.city;
@@ -59,10 +56,27 @@ $(document).ready(function(){
 				$birthday.style.display = 'none';
 			}
 		})
-		$pictureLink.setAttribute('data-lightbox', 'img' + i);
+		$anchor.setAttribute('data-lightbox', 'img-' + i);
+		$anchor.setAttribute('data-title', 'Click Outside the modal to exit');
+		$anchor.style.color = '#000';
 	}
-	let $card = $('div.card');
-	$card.click(function(){
-		
+	lightbox.option({
+		'alwaysShowNavOnTouchDevices': true,
+		'wrapAround': true,
+		'sanitizeTitle': true
+	})
+	let $anchor = $('a');
+	//displays the modal with the correct info
+	$anchor.on('click', function(){
+		//travering through the DOM in order to display modal
+		let overlay = this.parentNode.parentNode.parentNode.nextElementSibling.nextElementSibling
+			.nextElementSibling.nextElementSibling.nextElementSibling;
+		let profileInfo = this.childNodes[1];
+		let nav = overlay.firstChild.firstChild.childNodes[1].childNodes;
+		console.log(nav);
+		//Changing the HTML on each elements.
+		for (let i=2; i < 8; i++){
+			nav[i].innerHTML = profileInfo.childNodes[i-2].innerHTML;
+		}
 	})
 })
